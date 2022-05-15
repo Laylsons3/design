@@ -1,4 +1,11 @@
+import { useState } from 'react'
+
 function Home() {
+    const [nomeCandidato, setNomeCandidato] = useState('');
+    const [numeroCandidato, setNumeroCandidato] = useState('');
+
+    console.log(nomeCandidato);
+
     return(
         <div>
             <div className="body">
@@ -66,17 +73,31 @@ function Home() {
                     </div>
 
                 </div>
+
+                <div className="dados-candidato">
+
+                <input 
+                onChange={e => setNomeCandidato(e.target.value)}
+                placeholder="Nome do candidato" 
+                type="text" />
+
+                <input 
+                onChange={e => setNumeroCandidato(e.target.value)}
+                placeholder="Número" 
+                type="text" />
+
+                </div>
                 <div className="main">
                     <div className="principal">
                         <div className="foto">
                             <img src="foto-teste.png"></img>
 
                             <div className="nome-candidato">
-                                Candidato Fulano
+                                {nomeCandidato}
                             </div>
                             
                             <div className="numero-candidato">
-                                12.345
+                                {numeroCandidato}
                             </div>
 
                         </div>
@@ -84,10 +105,7 @@ function Home() {
                     </div>
                     <div className="menu">
 
-                        <input placeholder="Nome do candidato" type="text" />
 
-
-                        <input placeholder="Número" type="text" />
                         
                         <span>Configuração</span>
 
