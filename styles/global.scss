@@ -26,7 +26,6 @@ body {
 
     .modelo-estilo {
         position: relative;
-        background-color: green;
         height: 70px;
         width: 70px;
         margin-left: 5px;
@@ -34,8 +33,10 @@ body {
         font-size: small;
         text-align: center;
         cursor: pointer;
+        transition: .1s;
         img {
             width: 70px;
+            border-radius: 8px;
         }
         .premium {
             position: absolute;
@@ -46,19 +47,16 @@ body {
         }
     }
     .modelo-estilo:hover {
-        filter: brightness(1.2);
+        filter: brightness(1.2) drop-shadow(0 0 1px black);
+        transform: scale(1.05);
     }
 }
-.dados-candidato {
-    display: flex;
-    justify-content: center;
-    margin: 5px;
-}
+
 
 .main {
     background-color: orange;
     padding: 10px;
-    width: 520px;
+    width: 550px;
     height: 350px;
     margin: auto;
     display: flex;
@@ -69,46 +67,103 @@ body {
         height: 330px;
         position: relative;
         .foto {
-            img {
+            .foto-base {
             width: 330px;
             height: 330px;
             padding: 0;
             }
-        .numero-candidato {
-            color: rebeccapurple;
+            .logo-partido {
+                transform: scale(.5);
+                filter: drop-shadow(0 0 1px white);
+                position: absolute;
+                bottom: -5px;
+                right: -20px;
+            }
+        .cargo {
             position: absolute;
-            bottom: 4px;
-            left: 16px;
-            font-family: sans-serif;
-            font-weight: 900;
-            font-size: 52px;
-            filter: drop-shadow(1px 1px 1px white);
+            bottom: 102px;
+            left: 10px;
+            font-size: 14px;
+            filter: drop-shadow(1px 1px 1px rgb(237,28,36));
         }
         .nome-candidato {
             color: white;
             position: absolute;
-            bottom: 58px;
-            left: 16px;
+            line-height: 100%;
+            bottom: 78px;
+            left: 10px;
             font-family: sans-serif;
             font-weight: 900;
-            font-size: 22px;
-            filter: drop-shadow(1px 1px 1px rebeccapurple);
+            font-size: 28px;
+            filter: drop-shadow(1px 1px 1px rgb(0,0,0));
+        }
+        .numero-candidato {
+            color: rgb(00,165,80);
+            position: absolute;
+            line-height: 100%;
+            bottom: 10px;
+            left: 10px;
+            font-family: sans-serif;
+            font-weight: 900;
+            font-size: 75px;
+            letter-spacing: -1px;
+            filter: drop-shadow(1px 1px 1px rgb(255,242,00));
+        }
+        .info {
+            position: absolute;
+            color: #fff;
+            bottom: 0;
+            left: 10px;
+            font-size: 10px;
+            letter-spacing: 0;
+            font-weight: 300;
+            text-transform: uppercase;
+            filter: drop-shadow(0 0 2px rgb(0,0,0));
+
         }
         }
     }
     .menu {
+        position: relative;
         display: flex;
         flex-direction: column;
         margin-left: 10px;
         background-color: rgba(255, 0, 0, 0.5);
         width: 190px;
         height: 330px;
+        font-family: 'Roboto';
+        .dados-candidato {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 5px;
+            input {
+                margin-right: 1px;
+                padding: 0 3px;
+                color: red;
+                border: none;
+                border-radius: 4px;
+                margin-bottom: 2px;
+            }
+            textarea {
+                margin-right: 1px;
+                padding: 0 3px;
+                color: red;
+                border: none;
+                border-radius: 4px;
+                font-family: 'Roboto';
+                font-size: 10pt;
+            }
+
+        }
+        .setup {
+            margin-left: 5px;
+            display: flex;
+            flex-direction: column;
             span {
                 font-size: 10px;
-        }
-        input {
-            font-size: 10px;
-            margin: 0 5px;
+
+            }
         }
     }
 }
