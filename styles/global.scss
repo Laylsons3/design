@@ -1,0 +1,108 @@
+*{margin:0;padding:0;box-sizing:border-box;}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+body {
+    background: #666;
+    color: #fff;
+    font-family: 'Roboto';
+}
+
+.cabecalho {
+    background-color: azure;
+    text-align: center;
+    color: #222;
+    height: 60px;
+}
+
+.estilos {
+    background-color: aquamarine;
+    height: 60px;
+    width: 70%;
+    margin: auto;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    padding: 5px;
+    display: flex;
+
+    .modelo-estilo {
+        position: relative;
+        background-color: green;
+        height: 50px;
+        width: 50px;
+        margin-left: 5px;
+        font-family: sans-serif;
+        font-size: small;
+        text-align: center;
+        cursor: pointer;
+        img {
+            width: 50px;
+        }
+        .premium {
+            position: absolute;
+            width: 20px;
+            top: 0px;
+            right: 0px;
+            filter: drop-shadow(0 0 1px black);
+        }
+    }
+    .modelo-estilo:hover {
+        filter: brightness(1.2);
+    }
+}
+
+.main {
+    background-color: orange;
+    padding: 10px;
+    width: 520px;
+    height: 350px;
+    margin: auto;
+    display: flex;
+
+    .principal {
+        background-color: orangered;
+        width: 330px;
+        height: 330px;
+        position: relative;
+        .foto {
+            img {
+            width: 330px;
+            height: 330px;
+            padding: 0;
+            }
+        .numero-candidato {
+            color: rebeccapurple;
+            position: absolute;
+            bottom: 4px;
+            left: 16px;
+            font-family: sans-serif;
+            font-weight: 900;
+            font-size: 52px;
+            filter: drop-shadow(1px 1px 1px white);
+        }
+        .nome-candidato {
+            color: white;
+            position: absolute;
+            bottom: 58px;
+            left: 16px;
+            font-family: sans-serif;
+            font-weight: 900;
+            font-size: 22px;
+            filter: drop-shadow(1px 1px 1px rebeccapurple);
+        }
+        }
+    }
+    .menu {
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+        background-color: rgba(255, 0, 0, 0.5);
+        width: 190px;
+        height: 330px;
+            span {
+                font-size: 10px;
+        }
+        input {
+            font-size: 10px;
+        }
+    }
+}
