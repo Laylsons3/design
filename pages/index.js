@@ -78,8 +78,7 @@ function Home() {
                 <div className="main">
                     <div className="principal">
                         <div className="foto">
-                        {image ? <img className='foto-base' src={URL.createObjectURL(image)} alt="Imagem" width="150" height="150" /> : <img style={{filter:'grayscale(100%)'}} className='foto-base' src="foto-teste.png" alt="Imagem" width="150" height="150" />}
-                            
+                        {image ? <img className='foto-base' src={URL.createObjectURL(image)} alt="Imagem do candidato"/> : <img className='foto-base' src="foto-teste.png" alt="Imagem do candidato"/>}
 
                             <div className="cargo">
                                 Deputado Estadual
@@ -88,7 +87,7 @@ function Home() {
                             <div className="nome-candidato">
                                 {nomeCandidato}
                             </div>
-                            
+
                             <div className="numero-candidato">
                                 {numeroCandidato}
                             </div>
@@ -106,10 +105,6 @@ function Home() {
                     </div>
                     <div className="menu">
 
-
-                        
-
-
                         <div className="dados-candidato">
 
                         <input 
@@ -121,7 +116,8 @@ function Home() {
                         <input 
                         className='input-numero'
                         onChange={e => setNumeroCandidato(e.target.value)}
-                        placeholder="Número" 
+                        placeholder="Número"
+                        maxLength="6"
                         type="text" />
 
                         <textarea 
@@ -144,23 +140,25 @@ function Home() {
                             <span>Tamanho da imagem</span>
                             <input disabled type="range" />
 
-                            <span>Tamanho da fonte: CARGO</span>
-                            <input disabled type="range" />
-
                             <span>Tamanho da fonte: NOME</span>
                             <input disabled type="range" />
 
                             <span>Tamanho da fonte: NÚMERO</span>
                             <input disabled type="range" />
 
+                            <button disabled>Remover fundo</button>
 
-                        </div>
-
-                        <input
+                            <input
+                            className='input-file'
                             type="file" 
                             name="image"
                             onChange={e => setImage(e.target.files[0])}
                             />
+
+
+                        </div>
+
+                        
 
                             
 
