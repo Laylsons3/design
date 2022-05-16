@@ -78,7 +78,7 @@ function Home() {
                 <div className="main">
                     <div className="principal">
                         <div className="foto">
-                        {image ? <img className='foto-base' src={URL.createObjectURL(image)} alt="Imagem" width="150" height="150" /> : <img className='foto-base' src="foto-teste.png" alt="Imagem" width="150" height="150" />}
+                        {image ? <img className='foto-base' src={URL.createObjectURL(image)} alt="Imagem" width="150" height="150" /> : <img style={{filter:'grayscale(100%)'}} className='foto-base' src="foto-teste.png" alt="Imagem" width="150" height="150" />}
                             
 
                             <div className="cargo">
