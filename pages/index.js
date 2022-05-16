@@ -4,6 +4,9 @@ function Home() {
     const [nomeCandidato, setNomeCandidato] = useState('Candidato');
     const [numeroCandidato, setNumeroCandidato] = useState('01234');
     const [info, setInfo] = useState('');
+    const [image, setImage] = useState('');
+    const [endImg, setEndImg] = useState('');
+    const [status, setStatus] = useState('');
 
     return(
         <div>
@@ -75,7 +78,8 @@ function Home() {
                 <div className="main">
                     <div className="principal">
                         <div className="foto">
-                            <img className='foto-base' src="foto-teste.png" />
+                        {image ? <img className='foto-base' src={URL.createObjectURL(image)} alt="Imagem" width="150" height="150" /> : <img className='foto-base' src="foto-teste.png" alt="Imagem" width="150" height="150" />}
+                            
 
                             <div className="cargo">
                                 Deputado Estadual
@@ -126,12 +130,16 @@ function Home() {
                         onChange={e => setInfo(e.target.value)}
                         placeholder="Informações de rodapé" 
                         type="text"
-                        maxlength="50"
+                        maxLength="50"
                         />
                         </div>
 
                         <div className='setup'>
-                            <h6>Configuração</h6>
+                            <h5>CONFIGURAÇÃO</h5>
+
+                            <span>Cor: NÚMERO</span>
+                            <input style={{transform:'scale(.8)'}} type="color" />
+                            
 
                             <span>Tamanho da imagem</span>
                             <input disabled type="range" />
@@ -148,6 +156,14 @@ function Home() {
 
                         </div>
 
+                        <input
+                            type="file" 
+                            name="image"
+                            onChange={e => setImage(e.target.files[0])}
+                            />
+
+                            
+
                         <button style={{margin:'5px'}}>Salvar</button>
 
 
@@ -156,9 +172,9 @@ function Home() {
 
 
                     </div>
-
+        
                 </div>
-
+                
 
             </div>
 
