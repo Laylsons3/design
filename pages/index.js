@@ -5,8 +5,7 @@ function Home() {
     const [numeroCandidato, setNumeroCandidato] = useState('01234');
     const [info, setInfo] = useState('');
     const [image, setImage] = useState('');
-    const [endImg, setEndImg] = useState('');
-    const [status, setStatus] = useState('');
+    const [cor, setCor] = useState('');
 
     return(
         <div>
@@ -88,8 +87,9 @@ function Home() {
                                 {nomeCandidato}
                             </div>
 
-                            <div className="numero-candidato">
+                            <div style={{color:`${cor}`}} className="numero-candidato">
                                 {numeroCandidato}
+                                
                             </div>
 
                             <div className='logo-partido'>
@@ -134,8 +134,10 @@ function Home() {
                             <h5>CONFIGURAÇÃO</h5>
 
                             <span>Cor: NÚMERO</span>
-                            <input style={{transform:'scale(.8)'}} type="color" />
-                            
+                            <input 
+                            onChange={e => setCor(e.target.value)}
+                            type="color"
+                             />
 
                             <span>Tamanho da imagem</span>
                             <input disabled type="range" />
