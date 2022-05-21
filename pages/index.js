@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React, { useState } from 'react'
 import { Atalhos } from '../components/atalhos';
 
@@ -10,9 +11,9 @@ function Home() {
     const [tamanhoNumero, setTamanhoNumero] = useState('75');
     const [tamanhoNome, setTamanhoNome] = useState('28');
     const [cargo, setCargo] = useState('Deputado Estadual');
-    const [numero, setNumero] = useState('');
+    const [numero, setNumero] = useState('10');
     const [opacidadeLogo, setOpacidadeLogo] = useState('');
-    const path = `../logo-partidos/${numero}.png`
+    const path = `/../logo-partidos/${numero}.png`
     
     const handleClick = (e) => {e.target.select();};
 
@@ -31,7 +32,7 @@ function Home() {
                 <div className="main">
                     <div className="principal">
                         <div className="foto">
-                        {image ? <img className='foto-base' src={URL.createObjectURL(image)} alt="Imagem do candidato"/> : <img className='foto-base' src="foto-teste.png" alt="Imagem do candidato"/>}
+                        {image ? <Image className='foto-base' src={URL.createObjectURL(image)} alt="Imagem do candidato"/> : <Image className='foto-base' src="/foto-teste.png" width="330px" height="330px" alt="Imagem do candidato"/>}
 
                             <div className="cargo">
                                 {cargo}
@@ -47,7 +48,7 @@ function Home() {
 
                             <div className='logo-partido'>
 
-                               <img style={{opacity:`${opacidadeLogo}%`}} src={path} />
+                               <Image  width="150px" height="150px" style={{opacity:`${opacidadeLogo}%`}} src={path} />
                                
                             </div>
 
@@ -76,7 +77,7 @@ function Home() {
                         type="text" />
 
                         <textarea 
-                        rows="3"
+                        rows="2"
                         className='input-info'
                         onChange={e => setInfo(e.target.value)}
                         placeholder="Informações de rodapé" 
