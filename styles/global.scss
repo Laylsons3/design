@@ -71,6 +71,8 @@ body {
         width: 330px;
         height: 330px;
         position: relative;
+        transition: .2s;
+
 
         .foto {
 
@@ -91,9 +93,9 @@ body {
 
         .cargo {
             position: absolute;
-            bottom: 102px;
+            bottom: 112px;
             left: 10px;
-            font-size: 14px;
+            font-size: 15px;
             filter: drop-shadow(1px 1px 1px rgb(0,0,0));
         }
 
@@ -101,11 +103,11 @@ body {
             color: white;
             position: absolute;
             line-height: 100%;
-            bottom: 78px;
+            bottom: 80px;
             left: 10px;
             font-family: sans-serif;
             font-weight: 900;
-            font-size: 28px;
+            // font-size: 28px;
             filter: drop-shadow(1px 1px 1px rgb(0,0,0));
         }
 
@@ -117,7 +119,7 @@ body {
             left: 10px;
             font-family: sans-serif;
             font-weight: 900;
-            font-size: 75px;
+            // font-size: 75px;
             letter-spacing: -1px;
             filter: drop-shadow(1px 1px 2px rgb(255,242,00));
         }
@@ -171,22 +173,41 @@ body {
         }
 
         .setup {
-            margin-left: 5px;
+            margin:0 5px;
             display: flex;
             flex-direction: column;
+            
 
             span {
                 font-size: 10px;
             }
 
             input {
-                transform: scale(.9);
+                transform: scale(.8);
+            }
+            select {
+                transform: scale(.8);
+                option {
+                font-size: 11px;
+                }
             }
             
             button {
                 margin: 5px 0;
-                margin-right: 5px;
             }
         }
     }
+}
+
+.setting {
+    display: flex;
+    flex-direction: row;
+}
+
+.botao-salvar:hover {
+    display: none;
+}
+
+.escondido {
+    display: none;
 }
