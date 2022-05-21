@@ -26,7 +26,7 @@ function Home() {
 
                 </div>
 
-                <Atalhos /> <br />
+                <Atalhos />
 
 
                 <div className="main">
