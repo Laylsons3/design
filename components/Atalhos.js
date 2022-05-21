@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export function Atalhos() {
+function Atalhos() {
     return(
         <div>
                 <div className="estilos">
@@ -61,3 +61,5 @@ export function Atalhos() {
         </div>
     )
 }
+
+export default Atalhos

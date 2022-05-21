@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React, { useState } from 'react'
-import { Atalhos } from '../components/atalhos';
+import Atalhos from '../components/Atalhos';
 
 function Home() {
     const [nomeCandidato, setNomeCandidato] = useState('Candidato');
