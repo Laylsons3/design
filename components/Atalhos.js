@@ -1,13 +1,15 @@
+import Image from 'next/image';
+
 export function Atalhos() {
     return(
         <div>
                 <div className="estilos">
 
                     <div className="modelo-estilo">
-                    <img src="teste1.png" />
+                    <Image alt="Modelos"  width="150px" height="150px" src="/teste1.png" />
                     </div>
 
-                    <div className="modelo-estilo">
+                    {/* <div className="modelo-estilo">
                     <img src="teste2.png" />                       
                     </div>
 
@@ -53,7 +55,7 @@ export function Atalhos() {
 
                     <div className="modelo-estilo">
                     <img src="teste5.png" />                       
-                    </div>
+                    </div> */}
 
                     </div>
         </div>

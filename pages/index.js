@@ -48,7 +48,7 @@ function Home() {
 
                             <div className='logo-partido'>
 
-                               <Image  width="150px" height="150px" style={{opacity:`${opacidadeLogo}%`}} src={path} />
+                               <Image width="150px" height="150px" style={{opacity:`${opacidadeLogo}%`}} src={path} alt="Imagem" />
                                
                             </div>
 
