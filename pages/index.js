@@ -28,7 +28,6 @@ function Home() {
 
                 <Atalhos />
 
-
                 <div className="main">
                     <div className="principal">
                         <div className="foto">
