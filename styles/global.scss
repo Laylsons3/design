@@ -2,83 +2,101 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 body {
-    background: #666;
+    background: #112441;
     color: #fff;
     font-family: 'Roboto';
 }
 
-.cabecalho {
-    background-color: azure;
-    text-align: center;
-    color: #222;
-    height: 60px;
-}
+// .estilos {
+//     background-color: aquamarine;
+//     height: 80px;
+//     width: 70%;
+//     margin: auto;
+//     margin-bottom: 5px;
+//     margin-top: 5px;
+//     padding: 5px;
+//     display: flex;
 
-.estilos {
-    background-color: aquamarine;
-    height: 80px;
-    width: 70%;
-    margin: auto;
-    margin-bottom: 5px;
-    margin-top: 5px;
-    padding: 5px;
-    display: flex;
-
-    .modelo-estilo {
-        position: relative;
-        height: 70px;
-        width: 70px;
-        margin-left: 5px;
-        font-family: sans-serif;
-        font-size: small;
-        text-align: center;
-        cursor: pointer;
-        transition: .12s ease;
+//     .modelo-estilo {
+//         position: relative;
+//         height: 70px;
+//         width: 70px;
+//         margin-left: 5px;
+//         font-family: sans-serif;
+//         font-size: small;
+//         text-align: center;
+//         cursor: pointer;
+//         transition: .12s ease;
         
-        Image {
-            width: 70px;
-            border-radius: 4px;
-        }
-        .premium {
-            position: absolute;
-            width: 20px;
-            top: 0px;
-            right: 0px;
-            filter: drop-shadow(0 0 1px black);
+//         Image {
+//             width: 70px;
+//             border-radius: 4px;
+//         }
+//         .premium {
+//             position: absolute;
+//             width: 20px;
+//             top: 0px;
+//             right: 0px;
+//             filter: drop-shadow(0 0 1px black);
             
-        }
-    }
-    .modelo-estilo:hover {
-        filter: drop-shadow(0 0 1px black);
-        transform: scale(1.05);
+//         }
+//     }
+//     .modelo-estilo:hover {
+//         filter: drop-shadow(0 0 1px black);
+//         transform: scale(1.05);
 
-        .premium {
-            filter: brightness(1.2) drop-shadow(0 0 1px black);
-        }
-    }
-}
+//         .premium {
+//             filter: brightness(1.2) drop-shadow(0 0 1px black);
+//         }
+//     }
+// }
 
 .main {
-    background-color: aqua;
-    padding: 10px;
-    width: 550px;
-    height: 350px;
+    background-color: rgb(48,156,209);
+    padding: 5px;
+    max-width: 990px;
+    height: 550px;
     margin: auto;
+    margin-top: 10px;
     display: flex;
 
-    .principal {
-        background-color: orangered;
-        width: 330px;
-        height: 330px;
-        position: relative;
-        transition: .2s;
+    .esquerda-dados {
+        background-color: #11244177;
+        border-radius: 4px;
+        padding: 0 5px;
+        padding-top: 5px;
+        margin-right: 5px;
 
+        .dados-candidato {
+            display: flex;
+            flex-direction: column;
+
+            input {
+                padding: 0 3px;
+                border: none;
+                border-radius: 2px;
+                margin-bottom: 2px;
+            }
+
+            textarea {
+                margin-right: 1px;
+                padding: 0 3px;
+                border: none;
+                border-radius: 2px;
+                font-family: 'Roboto';
+                font-size: 10pt;
+                resize: none;
+            }
+        }
+    }
+
+    .principal {
+        background-color: #11244155;
+        position: relative;
 
         .foto {
 
             .foto-base {
-            width: 330px;
-            height: 330px;
             padding: 0;
             object-fit: cover;
             }
@@ -142,35 +160,14 @@ body {
         display: flex;
         flex-direction: column;
         margin-left: 10px;
-        background-color: rgba(0, 128, 0, 0.6);
+        background-color: #11244177;
         width: 190px;
         height: 330px;
         font-family: 'Roboto';
 
-        .dados-candidato {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            margin: 5px;
 
-            input {
-                margin-right: 1px;
-                padding: 0 3px;
-                border: none;
-                border-radius: 2px;
-                margin-bottom: 2px;
-            }
 
-            textarea {
-                margin-right: 1px;
-                padding: 0 3px;
-                border: none;
-                border-radius: 2px;
-                font-family: 'Roboto';
-                font-size: 10pt;
-                resize: none;
-            }
-        }
+        
 
         .setup {
             margin:0 5px;

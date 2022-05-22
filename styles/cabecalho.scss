@@ -1,0 +1,55 @@
+.cabecalho {
+    background-color: azure;
+    text-align: center;
+    color: #222;
+    position: relative;
+    
+    .container-cabecalho {
+        display: flex;
+        flex-direction: row;
+        h1 {
+            margin-left: 5px;
+        }
+        .menu-1 {
+            position: absolute;
+            top: 10px;
+            right: 0;
+            a {
+                margin: 5px 3px;
+                padding: 4px 8px;
+                cursor: pointer;
+                border: none;
+                border-radius: 8px;
+                background-color: #112441;
+                color: #fff;
+                font-size: medium;
+                text-decoration: none;
+            }
+            a:hover {
+                background-color: rgb(48,156,209);
+                text-decoration: underline;
+            }
+        }
+    }
+    .menu-p {
+        div {
+            margin-bottom: 0;
+            a {
+                padding: 1px 12px;
+                padding-top: 3px;
+                cursor: pointer;
+                border: none;
+                border-top-left-radius: 6px;
+                border-top-right-radius: 6px;
+                background-color: #112441;
+                color: #fff;
+                font-size: smaller;
+                text-decoration: none;
+                margin: 0 1px;
+            }
+            a:hover {
+                background-color: rgb(48,156,209);
+            }
+        }
+    }
+}
