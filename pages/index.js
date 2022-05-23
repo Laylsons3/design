@@ -1,11 +1,15 @@
 import Image from 'next/image';
-import React, { useState } from 'react'
-import Atalhos from '../components/Atalhos';
+import React, { useState, useRef } from 'react'
 import { Popover } from '@headlessui/react';
 import Head from 'next/head';
 import Header from '../components/Header';
+import exportAsImage from "./utils/exportAsImage";
+
 
 function Home() {
+    const exportRef = useRef();
+    const [enableOverflow, setOverflow] = useState(true);
+
     const [info, setInfo] = useState('');
 
     //IMAGEM PRINCIPAL
@@ -51,6 +55,10 @@ function Home() {
     const path = `/logo-partidos/${numero}.png`
     
     const handleClick = (e) => {e.target.select();};  // PEGA O HEXADECIMAL DO INPUT COLOR
+
+    // SALVAR IMAGEM
+    
+
 
     return(
 
@@ -165,7 +173,7 @@ function Home() {
             </div>
             </div>
 
-            <div className="principal">
+            <div ref={exportRef} className="principal" id="captura">
 
                 <div 
                 style={{
@@ -678,15 +686,18 @@ function Home() {
                         </div>
 
                         <div className='flex-row'>
-                            <span>Dist Vertic.</span>
                             <input 
                             style={{
                                 position:'absolute',
-                                right:'0'}}
+                                right:'-48px',
+                                top:'-31px',
+                                transform:'rotate(-90deg) scale(.8)',
+                                width:'110px'
+                            }}
                             onChange={e => setDistanciaVerticalNumero(e.target.value)}
                             value={distanciaVerticalNumero}
                             min={10}
-                            max={450}
+                            max={430}
                             type="range" 
                             />
                         </div>
@@ -703,11 +714,19 @@ function Home() {
                         </div>
                     </div>
 
-                    <button disabled>Remover fundo</button>
+                    <button disabled >Remover fundo</button>
 
                 </div>
 
-                <button className='botao-salvar'>Salvar</button>
+                <div>
+                    <button style={{position:'absolute',bottom:'0',padding:'4px 68px',margin:'0 5px',marginBottom:'5px',borderRadius:'4px',border:'none',cursor:'pointer'}} onClick={() => exportAsImage(exportRef.current, "test")}>
+                        Salvar
+                    </button>
+                </div>
+
+                {/* <button onClick={() => setOverflow(!enableOverflow)}>
+                    {enableOverflow ? "Disable Overflow" : "Enable Overflow"}
+                </button> */}
 
             </div>
 
