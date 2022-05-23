@@ -1,6 +1,12 @@
-function DesignerList() {
+import Header from "../components/Header"
+
+function SouDesigner() {
     return(
         <div style={{textAlign:'center'}}>
+
+            <Header />
+
+
             <h1>DESIGNER</h1>
 
             <div>
@@ -10,4 +16,4 @@ function DesignerList() {
     )
 }
 
-export default DesignerList
+export default SouDesigner
