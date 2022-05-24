@@ -8,7 +8,6 @@ import exportAsImage from "./utils/exportAsImage";
 
 function Home() {
     const exportRef = useRef();
-    const [enableOverflow, setOverflow] = useState(true);
 
     const [info, setInfo] = useState('');
 
@@ -723,10 +722,6 @@ function Home() {
                         Salvar
                     </button>
                 </div>
-
-                {/* <button onClick={() => setOverflow(!enableOverflow)}>
-                    {enableOverflow ? "Disable Overflow" : "Enable Overflow"}
-                    </button> */}
 
             </div>
 
