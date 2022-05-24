@@ -3,7 +3,7 @@ import React, { useState, useRef } from 'react'
 import { Popover } from '@headlessui/react';
 import Head from 'next/head';
 import Header from '../components/Header';
-import exportAsImage from "./utils/exportAsImage";
+// import exportAsImage from "./utils/exportAsImage";
 import html2canvas from "html2canvas";
 
 
