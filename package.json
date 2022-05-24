@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
-    "lint": "next lint"
+    "lint": "next lint",
+    "vercel-build": "npm run prepare && next build"
   },
   "repository": {
     "type": "git",
