@@ -4,6 +4,7 @@ import { Popover } from '@headlessui/react';
 import Head from 'next/head';
 import Header from '../components/Header';
 import exportAsImage from "./utils/exportAsImage";
+import html2canvas from "html2canvas";
 
 
 function Home() {
@@ -57,8 +58,45 @@ function Home() {
 
     // SALVAR IMAGEM
     
-    // const refHtml = useRef();
-    // console.log(refHtml.current);
+    const refHtml = useRef();
+    const refBody = useRef();
+
+    const exportAsImage = async (element, imageFileName) => {
+        const section = refHtml.current;
+        const body = refBody.current;
+        let htmlWidth = section.clientWidth;
+        let bodyWidth = body.clientWidth;
+      
+        const newWidth = element.scrollWidth - element.clientWidth;
+      
+        if (newWidth > element.clientWidth) {
+          sectionWidth += newWidth;
+          bodyWidth += newWidth;
+        }
+      
+        section.style.width = htmlWidth + "px";
+        body.style.width = bodyWidth + "px";
+      
+        const canvas = await html2canvas(element);
+        const image = canvas.toDataURL("image/png", 1.0);
+        downloadImage(image, imageFileName);
+        section.style.width = null;
+        body.style.width = null;
+      };
+      
+      const downloadImage = (blob, fileName) => {
+        const fakeLink = window.document.createElement("a");
+        fakeLink.style = "display:none;";
+        fakeLink.download = fileName;
+      
+        fakeLink.href = blob;
+      
+        document.body.appendChild(fakeLink);
+        fakeLink.click();
+        document.body.removeChild(fakeLink);
+      
+        fakeLink.remove();
+      };
 
     /* ref={refHtml} */
 
@@ -174,88 +212,93 @@ function Home() {
             </div>
             </div>
 
-            <div ref={exportRef} className="principal" id="captura">
+            {/* IMAGEM PRINCIPAL */}
 
-                <div 
-                style={{
-                    backgroundImage:`url(${background})`,
-                    width:'540px',
-                    height:'540px'}} 
-                className="foto">
-
-                {   image ? <Image 
-                    className='foto-base' 
-                    width={540} 
-                    height={540} 
-                    src={URL.createObjectURL(image)} 
-                    alt="Imagem do candidato"
-                    style={{transform:`scale(${tamanhoImagemCandidato}%)`}}
-                    />
-                        : 
-                        <Image 
-                            className='foto-base' 
-                            src="/foto-teste.png" 
-                            width={540} 
-                            height={540} 
-                            alt="Imagem do candidato"
-                            style={{transform:`scale(${tamanhoImagemCandidato}%)`}}
-                    />}
-
+            <div ref={refHtml}>
+                <div ref={refBody}>
+                <section ref={exportRef} className="principal" id="captura">
                     <div 
-                    className='logo-partido' 
                     style={{
-                        position:'absolute',
-                        filter:'drop-shadow(1px 1px 1px white)',
-                        opacity:`${opacidadeLogo}%`,
-                        transform:`scale(${tamanhoLogo}%)`,
-                        top:`${distanciaVerticalLogo}px`,
-                        left:`${distanciaHorizontalLogo}px`,
-                        width:'300px',
-                        height:'300px',
-                        background:`url(${path}) no-repeat`,
-                        backgroundRepeat:'no-repeat'
-                    }} >
+                        backgroundImage:`url(${background})`,
+                        width:'540px',
+                        height:'540px'}} 
+                    className="foto">
 
+                    {   image ? <Image 
+                        className='foto-base' 
+                        width={540} 
+                        height={540} 
+                        src={URL.createObjectURL(image)} 
+                        alt="Imagem do candidato"
+                        style={{transform:`scale(${tamanhoImagemCandidato}%)`}}
+                        />
+                            : 
+                            <Image 
+                                className='foto-base' 
+                                src="/foto-teste.png" 
+                                width={540} 
+                                height={540} 
+                                alt="Imagem do candidato"
+                                style={{transform:`scale(${tamanhoImagemCandidato}%)`}}
+                        />}
+
+                        <div 
+                        className='logo-partido' 
+                        style={{
+                            position:'absolute',
+                            filter:'drop-shadow(1px 1px 1px white)',
+                            opacity:`${opacidadeLogo}%`,
+                            transform:`scale(${tamanhoLogo}%)`,
+                            top:`${distanciaVerticalLogo}px`,
+                            left:`${distanciaHorizontalLogo}px`,
+                            width:'300px',
+                            height:'300px',
+                            background:`url(${path}) no-repeat`,
+                            backgroundRepeat:'no-repeat'
+                        }} >
+
+                        </div>
+
+                        <span 
+                        style={{
+                            fontSize:`${tamanhoCargo}px`,
+                            left:`${distanciaHorizontalCargo}px`,
+                            bottom:`${distanciaVerticalCargo}px`,
+                            color:`${corCargo}`}} 
+                        className="cargo">{cargo}
+                        </span>
+
+                        <span 
+                        style={{
+                            fontSize:`${tamanhoNome}px`,
+                            color:`${corNome}`,
+                            bottom:`${distanciaVerticalNome}px`,
+                            left:`${distanciaHorizontalNome}px`,
+                            fontFamily:`${fonteNome}`
+                        }} 
+                        className="nome-candidato">
+                            {nomeCandidato}
+                        </span>
+
+                        <span 
+                        style={{
+                            color:`${corNumero}`,
+                            fontSize:`${tamanhoNumero}px`,
+                            bottom:`${distanciaVerticalNumero}px`,
+                            left:`${distanciaHorizontalNumero}px`,
+                            filter:`drop-shadow(1px 1px 2px ${corSombraNumero})`,
+                            fontFamily:`${fonteNumero}`
+                        }} 
+                        className="numero-candidato">
+                            {numeroCandidato}
+                        </span>
+
+                        <span 
+                        className='info'>
+                            {info}
+                        </span>
                     </div>
-
-                    <span 
-                    style={{
-                        fontSize:`${tamanhoCargo}px`,
-                        left:`${distanciaHorizontalCargo}px`,
-                        bottom:`${distanciaVerticalCargo}px`,
-                        color:`${corCargo}`}} 
-                    className="cargo">{cargo}
-                    </span>
-
-                    <span 
-                    style={{
-                        fontSize:`${tamanhoNome}px`,
-                        color:`${corNome}`,
-                        bottom:`${distanciaVerticalNome}px`,
-                        left:`${distanciaHorizontalNome}px`,
-                        fontFamily:`${fonteNome}`
-                    }} 
-                    className="nome-candidato">
-                        {nomeCandidato}
-                    </span>
-
-                    <span 
-                    style={{
-                        color:`${corNumero}`,
-                        fontSize:`${tamanhoNumero}px`,
-                        bottom:`${distanciaVerticalNumero}px`,
-                        left:`${distanciaHorizontalNumero}px`,
-                        filter:`drop-shadow(1px 1px 2px ${corSombraNumero})`,
-                        fontFamily:`${fonteNumero}`
-                    }} 
-                    className="numero-candidato">
-                        {numeroCandidato}
-                    </span>
-
-                    <span 
-                    className='info'>
-                        {info}
-                    </span>
+                    </section>
                 </div>
             </div>
 

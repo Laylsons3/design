@@ -1,25 +1,25 @@
 import html2canvas from "html2canvas";
 
 const exportAsImage = async (element, imageFileName) => {
-  const html = document.getElementsByTagName("html")[0];
+  const section = document.getElementsByTagName("section")[0];
   const body = document.getElementsByTagName("body")[0];
-  let htmlWidth = html.clientWidth;
+  let htmlWidth = section.clientWidth;
   let bodyWidth = body.clientWidth;
 
   const newWidth = element.scrollWidth - element.clientWidth;
 
   if (newWidth > element.clientWidth) {
-    htmlWidth += newWidth;
+    sectionWidth += newWidth;
     bodyWidth += newWidth;
   }
 
-  html.style.width = htmlWidth + "px";
+  section.style.width = htmlWidth + "px";
   body.style.width = bodyWidth + "px";
 
   const canvas = await html2canvas(element);
   const image = canvas.toDataURL("image/png", 1.0);
   downloadImage(image, imageFileName);
-  html.style.width = null;
+  section.style.width = null;
   body.style.width = null;
 };
 
