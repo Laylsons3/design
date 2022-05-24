@@ -57,11 +57,13 @@ function Home() {
 
     // SALVAR IMAGEM
     
+    // const refHtml = useRef();
+    // console.log(refHtml.current);
 
+    /* ref={refHtml} */
 
     return(
-
-<div>
+<>
     <Head>
         <title>Design</title>
         <meta 
@@ -747,9 +749,7 @@ function Home() {
         </div>
 
     </div>
-
-</div>
-
+</>
     )
 }
 
