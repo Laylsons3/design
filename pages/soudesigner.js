@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import exportAsImage from "./utils/exportAsImage";
 import Header from '../components/Header';
 
 export default function App() {
