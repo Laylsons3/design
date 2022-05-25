@@ -3,9 +3,8 @@ import React, { useState, useRef } from 'react'
 import { Popover } from '@headlessui/react';
 import Head from 'next/head';
 import Header from '../components/Header';
-// import exportAsImage from "./utils/exportAsImage";
-import html2canvas from "html2canvas";
 
+import html2canvas from "html2canvas";
 
 function Home() {
     const exportRef = useRef();
@@ -17,8 +16,8 @@ function Home() {
     const [tamanhoImagemCandidato, setTamanhoImagemCandidato] = useState('');
 
     //NUMERO
-    const [corNumero, setCorNumero] = useState('#118888'); // COR DO NUMERO DO CANDIDATO
-    const [corSombraNumero, setCorSombraNumero] = useState('#FFD700');
+    const [corNumero, setCorNumero] = useState('#404040'); // COR DO NUMERO DO CANDIDATO
+    const [corSombraNumero, setCorSombraNumero] = useState('#FFFFFF');
     const [numeroCandidato, setNumeroCandidato] = useState('01.234');
     const [tamanhoNumero, setTamanhoNumero] = useState('110');
     const [distanciaVerticalNumero, setDistanciaVerticalNumero] = useState('10');
@@ -42,7 +41,8 @@ function Home() {
     const [distanciaHorizontalCargo, setDistanciaHorizontalCargo] = useState('10');
     const [corCargo, setCorCargo] = useState('#FFFFFF'); // COR DO CARGO
 
-    const [background, setBackgroung] = useState('/bg/bg1.jpg');
+    const [background, setBackgroung] = useState('#ff972d, #db1865');
+    const [rotacaoBackground , setRotacaoBackground] = useState('0');
 
     //LOGO
     const [opacidadeLogo, setOpacidadeLogo] = useState('100');
@@ -73,18 +73,18 @@ function Home() {
           sectionWidth += newWidth;
           bodyWidth += newWidth;
         }
-      
+
         section.style.width = htmlWidth + "px";
-        body.style.width = bodyWidth + "px";
-      
+        body.style.width = bodyWidth + "px";  // MULTIPLICAR POR 2 PARA DOBRAR O TAMANHO DA LARGURA
+
         const canvas = await html2canvas(element);
         const image = canvas.toDataURL("image/png", 1.0);
         downloadImage(image, imageFileName);
         section.style.width = null;
         body.style.width = null;
-      };
-      
-      const downloadImage = (blob, fileName) => {
+        };
+
+        const downloadImage = (blob, fileName) => {
         const fakeLink = window.document.createElement("a");
         fakeLink.style = "display:none;";
         fakeLink.download = fileName;
@@ -97,8 +97,6 @@ function Home() {
       
         fakeLink.remove();
       };
-
-    /* ref={refHtml} */
 
     return(
 <>
@@ -210,7 +208,108 @@ function Home() {
                     />
                 </div>
             </div>
+
+            {/* BACKGROUND */}
+
+            <div style={{textAlign:'center'}}>
+                
+                <input
+                style={{marginTop:'5px'}}
+                onChange={e => setRotacaoBackground(e.target.value)}
+                value={rotacaoBackground}
+                min={0}
+                max={360}
+                type="range" 
+                />
+
             </div>
+
+
+            <div style={{textAlign:'center',marginTop:'5px'}}>
+                        <Popover>
+                            <Popover.Button 
+                                style={{
+                                    cursor:'pointer',
+                                    padding:'2px 8px',
+                                    borderRadius:'4px',
+                                    border:'none'
+                                    }}>
+                                        Selecionar Background
+                            </Popover.Button>
+
+                                <Popover.Panel>
+                                    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr 1fr',marginBottom:'5px'}}>
+
+                                        <button value="#ff972d, #db1865"
+                                        style={{backgroundImage:'linear-gradient(#ff972d, #db1865)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
+                                        onClick={e => setBackgroung(e.target.value)}/>
+                                        <button value="#f9a841, #8b5708"
+                                        style={{backgroundImage:'linear-gradient(#f9a841, #8b5708)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
+                                        onClick={e => setBackgroung(e.target.value)}/>
+                                        <button value="#85ccf6, #329cbf"
+                                        style={{backgroundImage:'linear-gradient(#85ccf6, #329cbf)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
+                                        onClick={e => setBackgroung(e.target.value)}/>
+                                        <button value="#179dd4, #c41063"
+                                        style={{backgroundImage:'linear-gradient(#179dd4, #c41063)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
+                                        onClick={e => setBackgroung(e.target.value)}/>
+                                        <button value="#31cdd4, #e8c735"
+                                        style={{backgroundImage:'linear-gradient(#31cdd4, #e8c735)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
+                                        onClick={e => setBackgroung(e.target.value)}/>
+                                        <button value="#f17dc4, #e22277"
+                                        style={{backgroundImage:'linear-gradient(#f17dc4, #e22277)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
+                                        onClick={e => setBackgroung(e.target.value)}/>
+                                        <button value="#7dd1ee, #076fc5"
+                                        style={{backgroundImage:'linear-gradient(#7dd1ee, #076fc5)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
+                                        onClick={e => setBackgroung(e.target.value)}/>
+                                        <button value="#38cbd2, #e77f62"
+                                        style={{backgroundImage:'linear-gradient(#38cbd2, #e77f62)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
+                                        onClick={e => setBackgroung(e.target.value)}/>
+                                        <button value="#fcd132, #9debbc"
+                                        style={{backgroundImage:'linear-gradient(#fcd132, #9debbc)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
+                                        onClick={e => setBackgroung(e.target.value)}/>
+                                        <button value="#fc3b45, #9c1176"
+                                        style={{backgroundImage:'linear-gradient(#fc3b45, #9c1176)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
+                                        onClick={e => setBackgroung(e.target.value)}/>
+                                        <button value="#0b9ac9, #ea11b1"
+                                        style={{backgroundImage:'linear-gradient(#0b9ac9, #ea11b1)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
+                                        onClick={e => setBackgroung(e.target.value)}/>
+                                        <button value="#074299, #28adc7"
+                                        style={{backgroundImage:'linear-gradient(#074299, #28adc7)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
+                                        onClick={e => setBackgroung(e.target.value)}/>
+                                        <button value="#cfb100, #faf320"
+                                        style={{backgroundImage:'linear-gradient(#cfb100, #faf320)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
+                                        onClick={e => setBackgroung(e.target.value)}/>
+                                        <button value="#83c58f, #2eb7c4"
+                                        style={{backgroundImage:'linear-gradient(#83c58f, #2eb7c4)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
+                                        onClick={e => setBackgroung(e.target.value)}/>
+                                        <button value="#f82150, #5ab4f5"
+                                        style={{backgroundImage:'linear-gradient(#f82150, #5ab4f5)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
+                                        onClick={e => setBackgroung(e.target.value)}/>
+                                        <button value="#df0d68, #fa5a35"
+                                        style={{backgroundImage:'linear-gradient(#df0d68, #fa5a35)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
+                                        onClick={e => setBackgroung(e.target.value)}/>
+                                        <button value="#ed0944, #a5e2f0"
+                                        style={{backgroundImage:'linear-gradient(#ed0944, #a5e2f0)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
+                                        onClick={e => setBackgroung(e.target.value)}/>
+                                        <button value="#6cc0f1, #f619a8"
+                                        style={{backgroundImage:'linear-gradient(#6cc0f1, #f619a8)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
+                                        onClick={e => setBackgroung(e.target.value)}/>
+                                        <button value="#eec21f, #f33928"
+                                        style={{backgroundImage:'linear-gradient(#eec21f, #f33928)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
+                                        onClick={e => setBackgroung(e.target.value)}/>
+                                        <button value="#6afddb, #f6a6cd"
+                                        style={{backgroundImage:'linear-gradient(#6afddb, #f6a6cd)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
+                                        onClick={e => setBackgroung(e.target.value)}/>
+
+                                    </div>
+
+                                </Popover.Panel>
+                        </Popover>
+                            
+                    </div>
+            </div>
+
+
 
             {/* IMAGEM PRINCIPAL */}
 
@@ -219,9 +318,10 @@ function Home() {
                 <section ref={exportRef} className="principal" id="captura">
                     <div 
                     style={{
-                        backgroundImage:`url(${background})`,
-                        width:'540px',
-                        height:'540px'}} 
+                        display:'flex',
+                        backgroundImage:`linear-gradient(${rotacaoBackground}deg, ${background})`,
+                        width:`33.8rem`,
+                        height:`33.8rem`}} 
                     className="foto">
 
                     {   image ? <Image 
@@ -311,81 +411,7 @@ function Home() {
 
                     <h5 style={{textAlign:'center'}}>CONFIGURAÇÃO</h5>
 
-                    {/* BACKGROUND */}
-
-                        <div style={{textAlign:'center'}}>
-                        <Popover>
-                            <Popover.Button 
-                                style={{
-                                    cursor:'pointer',
-                                    padding:'2px 8px',
-                                    borderRadius:'4px',
-                                    border:'none'
-                                    }}>
-                                        Selecionar Background
-                            </Popover.Button>
-
-                                <Popover.Panel>
-                                    <div 
-                                    style={{
-                                        display:'flex',
-                                        flexDirection:'column',
-                                        position:'absolute',
-                                        right:'-130px',
-                                        top:'0'
-                                    }}>
-                                    <button 
-                                        className='botao-bg'
-                                        style={{
-                                            backgroundImage:'url(/bg/bg1.jpg)',
-                                            padding:'10px'}}
-                                        onClick={e => setBackgroung(e.target.value)}
-                                        value="/bg/bg1.jpg"
-                                        >Bg-1</button>
-                                        
-                                        <button className='botao-bg'
-                                            style={{
-                                                backgroundImage:'url(/bg/bg2.jpg)',
-                                                padding:'10px'}}
-                                            onClick={e => setBackgroung(e.target.value)}
-                                            value="/bg/bg2.jpg"
-                                        >Bg-2</button>
-                                        
-                                        <button className='botao-bg'
-                                            style={{
-                                                backgroundImage:'url(/bg/bg3.jpg)',
-                                                padding:'10px'}}
-                                            onClick={e => setBackgroung(e.target.value)}
-                                            value="/bg/bg3.jpg"
-                                        >Bg-3</button>
-                                        
-                                        <button className='botao-bg'
-                                            style={{
-                                                backgroundImage:'url(/bg/bg4.jpg)',
-                                                padding:'10px'}}
-                                            onClick={e => setBackgroung(e.target.value)}
-                                            value="/bg/bg4.jpg"
-                                        >Bg-4</button>
-                                        
-                                        <button className='botao-bg'
-                                            style={{
-                                                backgroundImage:'url(/bg/bg5.jpg)',
-                                                padding:'10px'}}
-                                            onClick={e => setBackgroung(e.target.value)}
-                                            value="/bg/bg5.jpg"
-                                        >Bg-5</button>
-
-                                            {/* <Image 
-                                                src={background} 
-                                                width={50} 
-                                                height={50} 
-                                                alt="Background" /> */}
-
-                                    </div>
-
-                                </Popover.Panel>
-                        </Popover>
-                    </div>
+                    
 
 
                     {/* MENU DIREITO */}
@@ -763,7 +789,9 @@ function Home() {
                 </div>
 
                 <div>
-                    <button style={{position:'absolute',bottom:'0',padding:'4px 68px',margin:'0 5px',marginBottom:'5px',borderRadius:'4px',border:'none',cursor:'pointer'}} onClick={() => exportAsImage(exportRef.current, "test")}>
+                    <button 
+                    style={{position:'absolute',bottom:'0',padding:'4px 68px',margin:'0 5px',marginBottom:'5px',borderRadius:'4px',border:'none',cursor:'pointer'}} 
+                    onClick={() => exportAsImage(exportRef.current, "Imagem")}>
                         Salvar
                     </button>
                 </div>
