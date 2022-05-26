@@ -1,8 +1,7 @@
-import React from "react";
-
-export default function App() {
-
+export default function teste() {
   return (
-      <div>Testando</div>
+    <div style={{textAlign:'center',margin:'5px'}}>
+      <h1>Teste</h1>
+    </div>
   );
 }

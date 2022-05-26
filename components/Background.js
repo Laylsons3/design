@@ -1,0 +1,23 @@
+export const bg = [
+    { cores: "#ff972d, #db1865",},
+    { cores: "#8b5708, #ffd700",},
+    { cores: "#85ccf6, #329cbf",},
+    { cores: "#179dd4, #c41063",},
+    { cores: "#31cdd4, #e8c735",},
+    { cores: "#f17dc4, #e22277",},
+    { cores: "#7dd1ee, #076fc5",},
+    { cores: "#38cbd2, #e77f62",},
+    { cores: "#fcd132, #9debbc",},
+    { cores: "#fc3b45, #9c1176",},
+    { cores: "#0b9ac9, #ea11b1",},
+    { cores: "#074299, #28adc7",},
+    { cores: "#cfb100, #faf320",},
+    { cores: "#83c58f, #2eb7c4",},
+    { cores: "#f82150, #5ab4f5",},
+    { cores: "#df0d68, #fa5a35",},
+    { cores: "#ed0944, #a5e2f0",},
+    { cores: "#6cc0f1, #f619a8",},
+    { cores: "#eec21f, #f33928",},
+    { cores: "#6afddb, #f6a6cd",},
+];
+  

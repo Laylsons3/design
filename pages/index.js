@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import React, { useState, useRef } from 'react'
-import { Popover } from '@headlessui/react';
 import Head from 'next/head';
 import Header from '../components/Header';
+import { bg } from '../components/Background';
 
 import html2canvas from "html2canvas";
 
@@ -42,7 +42,7 @@ function Home() {
     const [corCargo, setCorCargo] = useState('#FFFFFF'); // COR DO CARGO
 
     const [background, setBackgroung] = useState('#ff972d, #db1865');
-    const [rotacaoBackground , setRotacaoBackground] = useState('0');
+    const [rotacaoBackground , setRotacaoBackground] = useState('180');
 
     //LOGO
     const [opacidadeLogo, setOpacidadeLogo] = useState('100');
@@ -224,89 +224,12 @@ function Home() {
 
             </div>
 
+            <div style={{textAlign:'center',margin:'5px'}}>
+            {bg.map(({ cores }) => (
+                <button style={{cursor:'pointer',border:'none',backgroundImage:`linear-gradient(${cores})`,padding:'15px',margin:'1px'}} key={cores} value={cores} onClick={e => setBackgroung(e.target.value)}/>
+            ))}
+            </div>
 
-            <div style={{textAlign:'center',marginTop:'5px'}}>
-                        <Popover>
-                            <Popover.Button 
-                                style={{
-                                    cursor:'pointer',
-                                    padding:'2px 8px',
-                                    borderRadius:'4px',
-                                    border:'none'
-                                    }}>
-                                        Selecionar Background
-                            </Popover.Button>
-
-                                <Popover.Panel>
-                                    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr 1fr',marginBottom:'5px'}}>
-
-                                        <button value="#ff972d, #db1865"
-                                        style={{backgroundImage:'linear-gradient(#ff972d, #db1865)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
-                                        onClick={e => setBackgroung(e.target.value)}/>
-                                        <button value="#f9a841, #8b5708"
-                                        style={{backgroundImage:'linear-gradient(#f9a841, #8b5708)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
-                                        onClick={e => setBackgroung(e.target.value)}/>
-                                        <button value="#85ccf6, #329cbf"
-                                        style={{backgroundImage:'linear-gradient(#85ccf6, #329cbf)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
-                                        onClick={e => setBackgroung(e.target.value)}/>
-                                        <button value="#179dd4, #c41063"
-                                        style={{backgroundImage:'linear-gradient(#179dd4, #c41063)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
-                                        onClick={e => setBackgroung(e.target.value)}/>
-                                        <button value="#31cdd4, #e8c735"
-                                        style={{backgroundImage:'linear-gradient(#31cdd4, #e8c735)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
-                                        onClick={e => setBackgroung(e.target.value)}/>
-                                        <button value="#f17dc4, #e22277"
-                                        style={{backgroundImage:'linear-gradient(#f17dc4, #e22277)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
-                                        onClick={e => setBackgroung(e.target.value)}/>
-                                        <button value="#7dd1ee, #076fc5"
-                                        style={{backgroundImage:'linear-gradient(#7dd1ee, #076fc5)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
-                                        onClick={e => setBackgroung(e.target.value)}/>
-                                        <button value="#38cbd2, #e77f62"
-                                        style={{backgroundImage:'linear-gradient(#38cbd2, #e77f62)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
-                                        onClick={e => setBackgroung(e.target.value)}/>
-                                        <button value="#fcd132, #9debbc"
-                                        style={{backgroundImage:'linear-gradient(#fcd132, #9debbc)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
-                                        onClick={e => setBackgroung(e.target.value)}/>
-                                        <button value="#fc3b45, #9c1176"
-                                        style={{backgroundImage:'linear-gradient(#fc3b45, #9c1176)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
-                                        onClick={e => setBackgroung(e.target.value)}/>
-                                        <button value="#0b9ac9, #ea11b1"
-                                        style={{backgroundImage:'linear-gradient(#0b9ac9, #ea11b1)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
-                                        onClick={e => setBackgroung(e.target.value)}/>
-                                        <button value="#074299, #28adc7"
-                                        style={{backgroundImage:'linear-gradient(#074299, #28adc7)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
-                                        onClick={e => setBackgroung(e.target.value)}/>
-                                        <button value="#cfb100, #faf320"
-                                        style={{backgroundImage:'linear-gradient(#cfb100, #faf320)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
-                                        onClick={e => setBackgroung(e.target.value)}/>
-                                        <button value="#83c58f, #2eb7c4"
-                                        style={{backgroundImage:'linear-gradient(#83c58f, #2eb7c4)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
-                                        onClick={e => setBackgroung(e.target.value)}/>
-                                        <button value="#f82150, #5ab4f5"
-                                        style={{backgroundImage:'linear-gradient(#f82150, #5ab4f5)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
-                                        onClick={e => setBackgroung(e.target.value)}/>
-                                        <button value="#df0d68, #fa5a35"
-                                        style={{backgroundImage:'linear-gradient(#df0d68, #fa5a35)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
-                                        onClick={e => setBackgroung(e.target.value)}/>
-                                        <button value="#ed0944, #a5e2f0"
-                                        style={{backgroundImage:'linear-gradient(#ed0944, #a5e2f0)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
-                                        onClick={e => setBackgroung(e.target.value)}/>
-                                        <button value="#6cc0f1, #f619a8"
-                                        style={{backgroundImage:'linear-gradient(#6cc0f1, #f619a8)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
-                                        onClick={e => setBackgroung(e.target.value)}/>
-                                        <button value="#eec21f, #f33928"
-                                        style={{backgroundImage:'linear-gradient(#eec21f, #f33928)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
-                                        onClick={e => setBackgroung(e.target.value)}/>
-                                        <button value="#6afddb, #f6a6cd"
-                                        style={{backgroundImage:'linear-gradient(#6afddb, #f6a6cd)',borderRadius:'4px',border:'2px solid #c0c0c0cc',cursor:'pointer',padding:'10px',margin:'1px'}}
-                                        onClick={e => setBackgroung(e.target.value)}/>
-
-                                    </div>
-
-                                </Popover.Panel>
-                        </Popover>
-                            
-                    </div>
             </div>
 
 
