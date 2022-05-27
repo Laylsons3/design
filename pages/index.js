@@ -3,8 +3,8 @@ import React, { useState, useRef } from 'react'
 import Head from 'next/head';
 import Header from '../components/Header';
 import { bg } from '../components/Background';
-
-import html2canvas from "html2canvas";
+import { exportAsImage } from '../components/ExportAsImage';
+import { RemoveBg } from '../components/RemoveBg'
 
 function Home() {
     const exportRef = useRef();
@@ -23,7 +23,6 @@ function Home() {
     const [distanciaVerticalNumero, setDistanciaVerticalNumero] = useState('10');
     const [distanciaHorizontalNumero, setDistanciaHorizontalNumero] = useState('10');
     const [fonteNumero, setFonteNumero] = useState('Montserrat');
-
 
     //NOME
     const [tamanhoNome, setTamanhoNome] = useState('50');
@@ -50,7 +49,6 @@ function Home() {
     const [distanciaVerticalLogo, setDistanciaVerticalLogo] = useState('-80');
     const [distanciaHorizontalLogo, setDistanciaHorizontalLogo] = useState('-40');
 
-
     const [numero, setNumero] = useState('0'); //NUMERO DO PARTIDO
     const path = `/logo-partidos/${numero}.png`
     
@@ -60,43 +58,6 @@ function Home() {
     
     const refHtml = useRef();
     const refBody = useRef();
-
-    const exportAsImage = async (element, imageFileName) => {
-        const section = refHtml.current;
-        const body = refBody.current;
-        let htmlWidth = section.clientWidth;
-        let bodyWidth = body.clientWidth;
-      
-        const newWidth = element.scrollWidth - element.clientWidth;
-      
-        if (newWidth > element.clientWidth) {
-          sectionWidth += newWidth;
-          bodyWidth += newWidth;
-        }
-
-        section.style.width = htmlWidth + "px";
-        body.style.width = bodyWidth + "px";  // MULTIPLICAR POR 2 PARA DOBRAR O TAMANHO DA LARGURA
-
-        const canvas = await html2canvas(element);
-        const image = canvas.toDataURL("image/png", 1.0);
-        downloadImage(image, imageFileName);
-        section.style.width = null;
-        body.style.width = null;
-        };
-
-        const downloadImage = (blob, fileName) => {
-        const fakeLink = window.document.createElement("a");
-        fakeLink.style = "display:none;";
-        fakeLink.download = fileName;
-      
-        fakeLink.href = blob;
-      
-        document.body.appendChild(fakeLink);
-        fakeLink.click();
-        document.body.removeChild(fakeLink);
-      
-        fakeLink.remove();
-      };
 
     return(
 <>
@@ -113,8 +74,7 @@ function Home() {
 
         <Header />
 
-        {/* <Atalhos /> */}
-
+        {/* <canvas id="canvas"></canvas> */}
 
         {/* PRINCIPAL */}
 
