@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+// import { AreaHeader } from './styled';
+
 function Header() {
     return(
         <div>
@@ -19,6 +21,14 @@ function Header() {
                             <a>CONTATO</a>
                             <a>DÚVIDAS</a>
                         </div>
+
+                        {/* <nav>
+                            <ul>
+                                <li>Inicio</li>
+                                <li>Mais</li>
+                                <li>Sobre</li>
+                            </ul>
+                        </nav> */}
 
                     </div>
 

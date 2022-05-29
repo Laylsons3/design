@@ -1,10 +1,15 @@
 import Image from 'next/image';
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useContext, createContext } from 'react'
 import Head from 'next/head';
 import Header from '../components/Header';
 import { bg } from '../components/Background';
+import { cargoPol } from '../components/Cargos';
+import { partidos } from '../components/Partidos';
 import { exportAsImage } from '../components/ExportAsImage';
-import { RemoveBg } from '../components/RemoveBg'
+import { RemoveBg } from '../components/RemoveBg';
+import { AppContext } from '../pages/context';
+
+export const UserContext = React.createContext();
 
 function Home() {
     const exportRef = useRef();
@@ -26,12 +31,11 @@ function Home() {
 
     //NOME
     const [tamanhoNome, setTamanhoNome] = useState('50');
-    const [nomeCandidato, setNomeCandidato] = useState('Candidato');
+    const [nomeCandidato, setNomeCandidato] = useState('Candidato(a)');
     const [corNome, setCorNome] = useState('#FFFFFF'); // COR DO NOME DO CANDIDATO
     const [distanciaVerticalNome, setDistanciaVerticalNome] = useState('105');
     const [distanciaHorizontalNome, setDistanciaHorizontalNome] = useState('10');
     const [fonteNome, setFonteNome] = useState('Roboto');
-
 
     //CARGO
     const [cargo, setCargo] = useState('Deputado Estadual');
@@ -40,6 +44,7 @@ function Home() {
     const [distanciaHorizontalCargo, setDistanciaHorizontalCargo] = useState('10');
     const [corCargo, setCorCargo] = useState('#FFFFFF'); // COR DO CARGO
 
+    //BACKGROUND
     const [background, setBackgroung] = useState('#ff972d, #db1865');
     const [rotacaoBackground , setRotacaoBackground] = useState('180');
 
@@ -55,16 +60,18 @@ function Home() {
     const handleClick = (e) => {e.target.select();};  // PEGA O HEXADECIMAL DO INPUT COLOR
 
     // SALVAR IMAGEM
-    
     const refHtml = useRef();
     const refBody = useRef();
+
+    //REMOVER FUNDO
+    const [tolerancia, setTolerancia] = useState('200');
 
     return(
 <>
     <Head>
         <title>Design</title>
-        <meta 
-            name="viewport" 
+        <meta
+            name="viewport"
             content="
                 initial-scale=1.0,
                 width=device-width" />
@@ -106,56 +113,25 @@ function Home() {
                 />
             </div>
 
-                    <select id="cargo" onChange={e => setCargo(e.target.value)}>
-                        <option>Deputado Estadual</option>
-                        <option>Deputada Estadual</option>
-                        <option>Deputado Federal</option>
-                        <option>Deputada Federal</option>
-                        <option>Senador</option>
-                        <option>Senadora</option>
-                        <option>Governador</option>
-                        <option>Governadora</option>
-                        <option>Presidente</option>
-                        <option>Presidenta</option>
-                    </select>
-
             <div>
+
                 <select onChange={e => setNumero(e.target.value)}>
-                    <option value={0}>Partido</option>
-                    <option value={10}>10 - REPUBLICANO</option>
-                    <option value={11}>11 - PP</option>
-                    <option value={12}>12 - PDT</option>
-                    <option value={13}>13 - PT</option>
-                    <option value={14}>14 - PTB</option>
-                    <option value={15}>15 - MDB</option>
-                    <option value={16}>16 - PSTU</option>
-                    <option value={17}>17 - PSL</option>
-                    <option value={18}>18 - REDE</option>
-                    <option value={19}>19 - PODE</option>
-                    <option value={20}>20 - PSC</option>
-                    <option value={21}>21 - PCB</option>
-                    <option value={22}>22 - PL</option>
-                    <option value={23}>23 - CIDADANIA</option>
-                    <option value={27}>27 - DC</option>
-                    <option value={28}>28 - PRTB</option>
-                    <option value={29}>29 - PCO</option>
-                    <option value={30}>30 - NOVO</option>
-                    <option value={33}>33 - PMN</option>
-                    <option value={35}>35 - PMB</option>
-                    <option value={36}>36 - AGIR</option>
-                    <option value={40}>40 - PSB</option>
-                    <option value={43}>43 - PV</option>
-                    <option value={44}>44 - UNIÃO</option>
-                    <option value={45}>45 - PSDB</option>
-                    <option value={50}>50 - PSOL</option>
-                    <option value={51}>51 - PATRIOTA</option>
-                    <option value={55}>55 - PSD</option>
-                    <option value={65}>65 - PCdoB</option>
-                    <option value={70}>70 - AVANTE</option>
-                    <option value={77}>77 - SOLIDARIEDADE</option>
-                    <option value={80}>80 - UP</option>
-                    <option value={90}>90 - PROS</option>
+                    {partidos.map(({ partido, numPart }) => (
+                        <option key={partido} value={numPart}>{partido}</option>
+                    ))}
+
                 </select>
+
+                {/* {bg.map(({ cores }) => (
+                <button  key={cores} value={cores} onClick={e => setBackgroung(e.target.value)}/>
+            ))} */}
+
+                    <select id="cargo" onChange={e => setCargo(e.target.value)}>
+                        {cargoPol.map(({ cargopolitico }) => (
+                        <option key={cargopolitico}>{cargopolitico}</option>
+                        ))}
+                    </select>
+                
 
                 <div className="input-file">
                     <label htmlFor="image">Enviar imagem</label>
@@ -190,7 +166,31 @@ function Home() {
             ))}
             </div>
 
+                <div style={{position:'absolute',bottom:'40px'}}>
+
+                        <div className='flex-row'>
+                            <span>Selecionar Cor</span><br />
+                            <input type="color" /><br />
+                        </div>
+
+                        <div className='flex-row'>
+                            <span>Remover</span><br />
+                            <input
+                            style={{marginTop:'5px',width:'80px'}}
+                            onChange={e => setTolerancia(e.target.value)}
+                            value={tolerancia}
+                            min={0}
+                            max={255}
+                            type="range"
+                            id="tolerancia"
+                            />
+                        </div>
+
+
+                </div>
+
             </div>
+            
 
 
 
@@ -207,7 +207,7 @@ function Home() {
                         height:`33.8rem`}} 
                     className="foto">
 
-                    {   image ? <Image 
+                    {/* {   image ? <Image 
                         className='foto-base' 
                         width={540} 
                         height={540} 
@@ -223,7 +223,9 @@ function Home() {
                                 height={540} 
                                 alt="Imagem do candidato"
                                 style={{transform:`scale(${tamanhoImagemCandidato}%)`}}
-                        />}
+                        />} */}
+
+                        <canvas id="canvas"></canvas>
 
                         <div 
                         className='logo-partido' 
