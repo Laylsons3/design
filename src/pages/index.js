@@ -7,7 +7,6 @@ import { cargoPol } from '../components/Cargos';
 import { partidos } from '../components/Partidos';
 import { exportAsImage } from '../components/ExportAsImage';
 import { RemoveBg } from '../components/RemoveBg';
-import { AppContext } from '../pages/context';
 
 export const UserContext = React.createContext();
 
