@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 
 const RemoveBg2 = () => {
     const canvas = useRef();
@@ -6,9 +6,10 @@ const RemoveBg2 = () => {
     const [tolerancia, setTolerancia] = useState('');
 
     const tolerance = tolerancia;
-    const referenceColor = {r:0, g:255, b:0}
 
     useEffect(() => {
+    const referenceColor = {r:0, g:255, b:0}
+
         const image = new Image();
         image.src = '/fundo-verde1.jpg';
         image.onload = drawImage;
@@ -52,7 +53,7 @@ function distance(color, reference) {
     return modulo;
 }
 
-},[image, canvas, referenceColor, tolerance])
+},[image, canvas, tolerance])
 
     return (
         <div>
