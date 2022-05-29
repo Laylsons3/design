@@ -52,7 +52,7 @@ function distance(color, reference) {
     return modulo;
 }
 
-},[image, canvas, referenceColor])
+},[image, canvas, referenceColor, tolerance])
 
     return (
         <div>
