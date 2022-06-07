@@ -1,23 +1,33 @@
 import Image from 'next/image';
-import React, { useState, useRef, useContext, createContext } from 'react'
+import React, { useState, useRef } from 'react'
 import Head from 'next/head';
 import Header from '../components/Header';
-import { bg } from '../components/Background';
-import { cargoPol } from '../components/Cargos';
-import { partidos } from '../components/Partidos';
 import { exportAsImage } from '../components/ExportAsImage';
-import { RemoveBg } from '../components/RemoveBg';
+// import useAuth from '../../hooks/useAuth';
+import InputText from '../components/Inputs/InputText';
+import Select from '../components/Inputs/Select';
+import BackgroundGradient from '../components/BackgroundGradient';
+import InputSettingFoto from '../components/Inputs/InputSettingFoto';
+import InputSettingLogo from '../components/Inputs/InputSettingLogo';
+import InputSettingCargo from '../components/Inputs/InputSettingCargo';
+import InputSettingNome from '../components/Inputs/InputSettingNome';
+import InputSettingNumero from '../components/Inputs/InputSettingNumero';
 
-export const UserContext = React.createContext();
+import Loading from '../components/layout/Loading';
 
 function Home() {
-    const exportRef = useRef();
+    // const { user, signin} = useAuth();
+    // console.log('user', user);
 
+    const exportRef = useRef();
+    const RefImage = useRef();
+
+    // INFORMAÇÕES DE RODAPÉ
     const [info, setInfo] = useState('');
 
     //IMAGEM PRINCIPAL
     const [image, setImage] = useState('');
-    const [tamanhoImagemCandidato, setTamanhoImagemCandidato] = useState('');
+    const [tamanhoImagemCandidato, setTamanhoImagemCandidato] = useState('100');
 
     //NUMERO
     const [corNumero, setCorNumero] = useState('#404040'); // COR DO NUMERO DO CANDIDATO
@@ -44,7 +54,7 @@ function Home() {
     const [corCargo, setCorCargo] = useState('#FFFFFF'); // COR DO CARGO
 
     //BACKGROUND
-    const [background, setBackgroung] = useState('#ff972d, #db1865');
+    const [background, setBackgroung] = useState('#2677a8, #aa77a8, #aaffaa');
     const [rotacaoBackground , setRotacaoBackground] = useState('180');
 
     //LOGO
@@ -69,18 +79,12 @@ function Home() {
 <>
     <Head>
         <title>Design</title>
-        <meta
-            name="viewport"
-            content="
-                initial-scale=1.0,
-                width=device-width" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
 
     <div className="body">
 
         <Header />
-
-        {/* <canvas id="canvas"></canvas> */}
 
         {/* PRINCIPAL */}
 
@@ -88,49 +92,22 @@ function Home() {
 
             <div className='esquerda-dados'>
 
-            <div className='dados-candidato'>
-            <input 
-                className='input-nome'
-                onChange={e => setNomeCandidato(e.target.value)}
-                placeholder="Nome do candidato" 
-                type="text" />
+                <div className='dados-candidato'>
 
-                <input 
-                className='input-numero'
-                onChange={e => setNumeroCandidato(e.target.value)}
-                placeholder="Número"
-                maxLength="6"
-                type="text" />
+                    <InputText 
+                    setNomeCandidato={setNomeCandidato} 
+                    setNumeroCandidato={setNumeroCandidato} 
+                    setInfo={setInfo} 
+                    />
 
-                <textarea 
-                rows="4"
-                className='input-info'
-                onChange={e => setInfo(e.target.value)}
-                placeholder="Informações de rodapé" 
-                type="text"
-                maxLength="100"
-                />
-            </div>
+                    <Select 
+                    setNumero={setNumero} 
+                    setCargo={setCargo} 
+                    />
+
+                </div>
 
             <div>
-
-                <select onChange={e => setNumero(e.target.value)}>
-                    {partidos.map(({ partido, numPart }) => (
-                        <option key={partido} value={numPart}>{partido}</option>
-                    ))}
-
-                </select>
-
-                {/* {bg.map(({ cores }) => (
-                <button  key={cores} value={cores} onClick={e => setBackgroung(e.target.value)}/>
-            ))} */}
-
-                    <select id="cargo" onChange={e => setCargo(e.target.value)}>
-                        {cargoPol.map(({ cargopolitico }) => (
-                        <option key={cargopolitico}>{cargopolitico}</option>
-                        ))}
-                    </select>
-                
 
                 <div className="input-file">
                     <label htmlFor="image">Enviar imagem</label>
@@ -146,85 +123,74 @@ function Home() {
 
             {/* BACKGROUND */}
 
-            <div style={{textAlign:'center'}}>
-                
-                <input
-                style={{marginTop:'5px'}}
-                onChange={e => setRotacaoBackground(e.target.value)}
-                value={rotacaoBackground}
-                min={0}
-                max={360}
-                type="range" 
+                <BackgroundGradient 
+                setBackgroung={setBackgroung} 
+                setRotacaoBackground={setRotacaoBackground}
                 />
-
-            </div>
-
-            <div style={{textAlign:'center',margin:'5px'}}>
-            {bg.map(({ cores }) => (
-                <button style={{cursor:'pointer',border:'none',backgroundImage:`linear-gradient(${cores})`,padding:'15px',margin:'1px'}} key={cores} value={cores} onClick={e => setBackgroung(e.target.value)}/>
-            ))}
-            </div>
 
                 <div style={{position:'absolute',bottom:'40px'}}>
 
-                        <div className='flex-row'>
-                            <span>Selecionar Cor</span><br />
-                            <input type="color" /><br />
-                        </div>
+                    <div className='flex-row'>
+                        <span>Selecionar Cor</span><br />
+                        <input type="color" /><br />
+                    </div>
 
-                        <div className='flex-row'>
-                            <span>Remover</span><br />
-                            <input
-                            style={{marginTop:'5px',width:'80px'}}
-                            onChange={e => setTolerancia(e.target.value)}
-                            value={tolerancia}
-                            min={0}
-                            max={255}
-                            type="range"
-                            id="tolerancia"
-                            />
-                        </div>
-
-
+                    <div className='flex-row'>
+                        <span>Remover</span><br />
+                        <input
+                        style={{marginTop:'5px',width:'80px'}}
+                        onChange={e => setTolerancia(e.target.value)}
+                        value={tolerancia}
+                        min={0}
+                        max={255}
+                        type="range"
+                        id="tolerancia"
+                        />
+                        
+                    </div>
                 </div>
-
             </div>
-            
-
-
 
             {/* IMAGEM PRINCIPAL */}
 
             <div ref={refHtml}>
                 <div ref={refBody}>
                 <section ref={exportRef} className="principal" id="captura">
+
+                    {/* BACKGROUND */}
+
                     <div 
                     style={{
                         display:'flex',
                         backgroundImage:`linear-gradient(${rotacaoBackground}deg, ${background})`,
-                        width:`33.8rem`,
-                        height:`33.8rem`}} 
+                        width:`540px`,
+                        height:`540px`}} 
                     className="foto">
 
-                    {/* {   image ? <Image 
+                        {/* IMAGEM */}
+
+                        {   
+                        image ? 
+                        <Image 
+                        ref={RefImage}
                         className='foto-base' 
                         width={540} 
                         height={540} 
                         src={URL.createObjectURL(image)} 
                         alt="Imagem do candidato"
                         style={{transform:`scale(${tamanhoImagemCandidato}%)`}}
+                        /> : 
+                        <Image 
+                        className='foto-base' 
+                        src="/foto-teste.png" 
+                        width={540} 
+                        height={540} 
+                        alt="Imagem do candidato"
+                        style={{transform:`scale(${tamanhoImagemCandidato}%)`}}
                         />
-                            : 
-                            <Image 
-                                className='foto-base' 
-                                src="/foto-teste.png" 
-                                width={540} 
-                                height={540} 
-                                alt="Imagem do candidato"
-                                style={{transform:`scale(${tamanhoImagemCandidato}%)`}}
-                        />} */}
+                        }
 
-                        <canvas id="canvas"></canvas>
+                        {/* LOGO */}
 
                         <div 
                         className='logo-partido' 
@@ -235,13 +201,14 @@ function Home() {
                             transform:`scale(${tamanhoLogo}%)`,
                             top:`${distanciaVerticalLogo}px`,
                             left:`${distanciaHorizontalLogo}px`,
-                            width:'300px',
-                            height:'300px',
+                            width:'340px',
+                            height:'340px',
                             background:`url(${path}) no-repeat`,
                             backgroundRepeat:'no-repeat'
                         }} >
-
                         </div>
+
+                        {/* CARGO */}
 
                         <span 
                         style={{
@@ -249,8 +216,11 @@ function Home() {
                             left:`${distanciaHorizontalCargo}px`,
                             bottom:`${distanciaVerticalCargo}px`,
                             color:`${corCargo}`}} 
-                        className="cargo">{cargo}
+                        className="cargo">
+                            {cargo}
                         </span>
+
+                        {/* NOME */}
 
                         <span 
                         style={{
@@ -264,23 +234,27 @@ function Home() {
                             {nomeCandidato}
                         </span>
 
+                        {/* NUMERO */}
+
                         <span 
                         style={{
                             color:`${corNumero}`,
                             fontSize:`${tamanhoNumero}px`,
                             bottom:`${distanciaVerticalNumero}px`,
                             left:`${distanciaHorizontalNumero}px`,
-                            filter:`drop-shadow(1px 1px 2px ${corSombraNumero})`,
                             fontFamily:`${fonteNumero}`
                         }} 
                         className="numero-candidato">
                             {numeroCandidato}
                         </span>
 
+                        {/* INFORMAÇÕES DE RODAPÉ */}
+
                         <span 
                         className='info'>
                             {info}
                         </span>
+
                     </div>
                     </section>
                 </div>
@@ -288,384 +262,88 @@ function Home() {
 
             {/* FIM MEIO */}
 
-
             <div className="menu">
 
                 <div className='setup'>
 
                     <h5 style={{textAlign:'center'}}>CONFIGURAÇÃO</h5>
 
-                    
-
-
                     {/* MENU DIREITO */}
-
 
                         {/* FOTO */}
 
                     <div className='setting'>
-
-                        <span style={{textAlign:'center'}}>FOTO</span>
-
-                        <div className='flex-row'>
-                            <span>Tamanho</span>
-                            <input 
-                            onChange={e => setTamanhoImagemCandidato(e.target.value)}
-                            value={tamanhoImagemCandidato}
-                            type="range"
-                            min={40}
-                            max={140}
-                            />
-                    
-                        </div>
-
+                        <InputSettingFoto 
+                        setTamanhoImagemCandidato={setTamanhoImagemCandidato} 
+                        tamanhoImagemCandidato={tamanhoImagemCandidato} />
                     </div>
 
                         {/* LOGO */}
 
                     <div className='setting'>
-
-                        <span style={{textAlign:'center'}}>LOGO</span>
-
-                        <div className='flex-row'>
-                            <span>Opacidade</span>
-                            <input 
-                            onChange={e => setOpacidadeLogo(e.target.value)}
-                            value={opacidadeLogo}
-                            type="range"
-                            style={{position:'absolute',right:'0'}}
-                            />
-                        </div>
-
-                        <div className='flex-row'>
-                                <span>Tamanho</span>
-                                <input 
-                                    style={{
-                                        position:'absolute',
-                                        right:'0'
-                                    }}
-                                    onChange={e => setTamanhoLogo(e.target.value)}
-                                    value={tamanhoLogo}
-                                    min={0}
-                                    max={100}
-                                    type="range" 
-                                    />
-                        </div>
-
-                        <div className='flex-row'>
-                            <span>Dist Vertic.</span>
-                            <input 
-                                style={{
-                                    position:'absolute',
-                                    right:'0'
-                                }}
-                                onChange={e => setDistanciaVerticalLogo(e.target.value)}
-                                value={distanciaVerticalLogo}
-                                min={-80}
-                                max={400}
-                                type="range" 
-                                />
-                        </div>
-
-                        <div className='flex-row'>
-                            <span>Dist Horiz.</span>
-                            <input 
-                                style={{
-                                    position:'absolute',
-                                    right:'0'
-                                }}
-                                onChange={e => setDistanciaHorizontalLogo(e.target.value)}
-                                value={distanciaHorizontalLogo}
-                                min={-40}
-                                max={350}
-                                type="range" 
-                                />
-                        </div>
+                        <InputSettingLogo 
+                        setOpacidadeLogo={setOpacidadeLogo}
+                        opacidadeLogo={opacidadeLogo}
+                        setTamanhoLogo={setTamanhoLogo}
+                        tamanhoLogo={tamanhoLogo}
+                        setDistanciaVerticalLogo={setDistanciaVerticalLogo}
+                        distanciaVerticalLogo={distanciaVerticalLogo}
+                        setDistanciaHorizontalLogo={setDistanciaHorizontalLogo}
+                        distanciaHorizontalLogo={distanciaHorizontalLogo}
+                        />
                     </div>
-
 
                     {/* CARGO */}
 
                     <div className='setting'>
-
-                        <span style={{textAlign:'center'}}>CARGO</span>
-
-                        <div className='flex-row'>
-                            <span>Tamanho</span>
-                            <input 
-                                style={{
-                                    position:'absolute',
-                                    right:'0'
-                                }}
-                                onChange={e => setTamanhoCargo(e.target.value)}
-                                value={tamanhoCargo}
-                                min={10}
-                                max={30}
-                                type="range" 
-                                />
-                        </div>
-
-                        <div className='flex-row'>
-                            <span>Cor</span>
-                            <input 
-                                style={{
-                                    position:'absolute',
-                                    left:'53px',
-                                    bottom:'-5px',
-                                    transform:'scale(.5)'
-                                }}
-                                onChange={e => setCorCargo(e.target.value)}
-                                value={corCargo}
-                                type="color"
-                                />
-
-                            <input 
-                                disabled
-                                value={corCargo} 
-                                type="text"
-                                onClick={handleClick} 
-                                style={{
-                                    width:'70px',
-                                    textAlign:'center',
-                                    textTransform:'uppercase',
-                                    color:'#00000088',
-                                    position:'absolute',
-                                    right:'8px',
-                                    top:'-1px'
-                                }}
-                                />
-                            
-                        </div>
-
-                        <div className='flex-row'>
-                            <span>Dist Vertic.</span>
-                            <input 
-                                style={{
-                                    position:'absolute',
-                                    right:'0'}}
-                                onChange={e => setDistanciaVerticalCargo(e.target.value)}
-                                value={distanciaVerticalCargo}
-                                min={10}
-                                max={280}
-                                type="range" 
-                                />
-                        </div>
-
-                        <div className='flex-row'>
-                            <span>Dist Horiz.</span>
-                            <input 
-                                style={{
-                                    position:'absolute',
-                                    right:'0'}}
-                                onChange={e => setDistanciaHorizontalCargo(e.target.value)}
-                                value={distanciaHorizontalCargo}
-                                min={10}
-                                max={500}
-                                type="range" 
-                                />
-                        </div>
+                        <InputSettingCargo 
+                        setTamanhoCargo={setTamanhoCargo}
+                        tamanhoCargo={tamanhoCargo}
+                        setCorCargo={setCorCargo}
+                        corCargo={corCargo}
+                        handleClick={handleClick}
+                        setDistanciaVerticalCargo={setDistanciaVerticalCargo}
+                        distanciaVerticalCargo={distanciaVerticalCargo}
+                        setDistanciaHorizontalCargo={setDistanciaHorizontalCargo}
+                        distanciaHorizontalCargo ={distanciaHorizontalCargo}
+                        />
                     </div>
 
                     {/* NOME */}
 
                     <div className='setting'>
-                        
-                        <span style={{textAlign:'center'}}>NOME</span>
-
-                        <div className='flex-row'>
-                            <span>Fonte</span>
-                            <select value={fonteNome} style={{position:'absolute',right:'0',top:'0'}} onChange={e => setFonteNome(e.target.value)}>
-                                <option style={{fontFamily:'Arial'}}>Arial</option>
-                                <option style={{fontFamily:'Bahnschrift'}}>Bahnschrift</option>
-                                <option style={{fontFamily:'Bebas Neue'}}>Bebas Neue</option>
-                                <option style={{fontFamily:'Book Antiqua'}}>Book Antiqua</option>
-                                <option style={{fontFamily:'Bookman Old Style'}}>Bookman Old Style</option>
-                                <option style={{fontFamily:'Calibri'}}>Calibri</option>
-                                <option style={{fontFamily:'Cambria'}}>Cambria</option>
-                                <option style={{fontFamily:'Candara'}}>Candara</option>
-                                <option style={{fontFamily:'Consolas'}}>Consolas</option>
-                                <option style={{fontFamily:'Comic Sans MS'}}>Comic Sans MS</option>
-                                <option style={{fontFamily:'Ink Free'}}>Ink Free</option>
-                                <option style={{fontFamily:'Impact'}}>Impact</option>
-                                <option style={{fontFamily:'Montserrat'}}>Montserrat</option>
-                                <option style={{fontFamily:'Verdana'}}>Verdana</option>
-                                <option style={{fontFamily:'Roboto'}}>Roboto</option>
-                            </select>
-                        </div>
-
-
-                        <div className='flex-row'>
-                            <span>Cor</span>
-                            <input 
-                            style={{
-                                position:'absolute',
-                                left:'53px',
-                                bottom:'-5px',
-                                transform:'scale(.5)'}}
-                            onChange={e => setCorNome(e.target.value)}
-                            value={corNome}
-                            type="color"
-                            />
-
-                            <input 
-                            disabled
-                            value={corNome} 
-                            type="text"
-                            onClick={handleClick} 
-                            style={{
-                                width:'70px',
-                                textAlign:'center',
-                                textTransform:'uppercase',
-                                color:'#00000088',
-                                position:'absolute',
-                                right:'8px',
-                                top:'-1px'}}
-                            />
-                        </div>
-
-                        <div className='flex-row'>
-                            <span>Tamanho</span>
-                            <input 
-                            onChange={e => setTamanhoNome(e.target.value)}
-                            min={20}
-                            max={80}
-                            type="range" 
-                            value={tamanhoNome}
-                            />
-                        </div>
-
-                        <div className='flex-row'>
-                            <span>Dist Vertic.</span>
-                            <input 
-                            style={{
-                                position:'absolute',
-                                right:'0'}}
-                            onChange={e => setDistanciaVerticalNome(e.target.value)}
-                            value={distanciaVerticalNome}
-                            min={10}
-                            max={450}
-                            type="range" 
-                            />
-                        </div>
-
-                        <div className='flex-row'>
-                            <span>Dist Horiz.</span>
-                            <input 
-                            style={{
-                                position:'absolute',
-                                right:'0'}}
-                            onChange={e => setDistanciaHorizontalNome(e.target.value)}
-                            value={distanciaHorizontalNome}
-                            min={10}
-                            max={200}
-                            type="range" 
-                            />
-                        </div>
-
+                        <InputSettingNome 
+                        fonteNome={fonteNome}
+                        setFonteNome={setFonteNome}
+                        setCorNome={setCorNome}
+                        corNome={corNome}
+                        handleClick={handleClick}
+                        setTamanhoNome={setTamanhoNome}
+                        tamanhoNome={tamanhoNome}
+                        setDistanciaVerticalNome={setDistanciaVerticalNome}
+                        distanciaVerticalNome={distanciaVerticalNome}
+                        setDistanciaHorizontalNome={setDistanciaHorizontalNome}
+                        distanciaHorizontalNome={distanciaHorizontalNome}
+                        />
                     </div>
 
                         {/* NUMERO */}
 
                     <div className='setting'>
-                        
-                        <span style={{textAlign:'center'}}>NUMERO</span>
-
-                        <div className='flex-row'>
-                            <span>Fonte</span>
-                            <select value={fonteNumero} style={{position:'absolute',right:'0',top:'0'}} onChange={e => setFonteNumero(e.target.value)}>
-                                <option style={{fontFamily:'Arial'}}>Arial</option>
-                                <option style={{fontFamily:'Bahnschrift'}}>Bahnschrift</option>
-                                <option style={{fontFamily:'Bebas Neue'}}>Bebas Neue</option>
-                                <option style={{fontFamily:'Book Antiqua'}}>Book Antiqua</option>
-                                <option style={{fontFamily:'Bookman Old Style'}}>Bookman Old Style</option>
-                                <option style={{fontFamily:'Calibri'}}>Calibri</option>
-                                <option style={{fontFamily:'Cambria'}}>Cambria</option>
-                                <option style={{fontFamily:'Candara'}}>Candara</option>
-                                <option style={{fontFamily:'Consolas'}}>Consolas</option>
-                                <option style={{fontFamily:'Comic Sans MS'}}>Comic Sans MS</option>
-                                <option style={{fontFamily:'Ink Free'}}>Ink Free</option>
-                                <option style={{fontFamily:'Impact'}}>Impact</option>
-                                <option style={{fontFamily:'Montserrat'}}>Montserrat</option>
-                                <option style={{fontFamily:'Verdana'}}>Verdana</option>
-                                <option style={{fontFamily:'Roboto'}}>Roboto</option>
-                            </select>
-                        </div>
-
-                        <div className='flex-row'>
-                        <span>Cor</span>
-                        <input 
-                        style={{
-                            position:'absolute',
-                            left:'53px',
-                            bottom:'-5px',
-                            transform:'scale(.5)'}}
-                        onChange={e => setCorNumero(e.target.value)}
-                        type="color"
-                        value={corNumero}
+                        <InputSettingNumero 
+                        fonteNumero={fonteNumero}
+                        setFonteNumero={setFonteNumero}
+                        setCorNumero={setCorNumero}
+                        corNumero={corNumero}
+                        setCorSombraNumero={setCorSombraNumero}
+                        corSombraNumero={corSombraNumero}
+                        handleClick={handleClick}
+                        setTamanhoNumero={setTamanhoNumero}
+                        setDistanciaVerticalNumero={setDistanciaVerticalNumero}
+                        distanciaVerticalNumero={distanciaVerticalNumero}
+                        setDistanciaHorizontalNumero={setDistanciaHorizontalNumero}
+                        distanciaHorizontalNumero={distanciaHorizontalNumero}
                         />
-                        <input 
-                        style={{
-                            position:'absolute',
-                            left:'25px',
-                            bottom:'-5px',
-                            transform:'scale(.5)'}}
-                        onChange={e => setCorSombraNumero(e.target.value)}
-                        type="color"
-                        value={corSombraNumero}
-                        />                        
-                        <input 
-                        disabled
-                        value={corNumero} 
-                        type="text"
-                        onClick={handleClick} 
-                        style={{
-                            width:'70px',
-                            textAlign:'center',
-                            textTransform:'uppercase',
-                            color:'#00000088',
-                            position:'absolute',
-                            right:'8px',
-                            top:'-1px'}}
-                        />
-                        </div>
-
-                        <div className='flex-row'>
-                            <span>Tamanho</span>
-                            <input 
-                            onChange={e => setTamanhoNumero(e.target.value)}
-                            min={60}
-                            max={185}
-                            type="range" 
-                            />
-                        </div>
-
-                        <div className='flex-row'>
-                            <input 
-                            style={{
-                                position:'absolute',
-                                right:'-48px',
-                                top:'-31px',
-                                transform:'rotate(-90deg) scale(.8)',
-                                width:'110px'
-                            }}
-                            onChange={e => setDistanciaVerticalNumero(e.target.value)}
-                            value={distanciaVerticalNumero}
-                            min={10}
-                            max={430}
-                            type="range" 
-                            />
-                        </div>
-
-                        <div className='flex-row'>
-                            <span>Dist Horiz.</span>
-                            <input style={{position:'absolute',right:'0'}}
-                            onChange={e => setDistanciaHorizontalNumero(e.target.value)}
-                            value={distanciaHorizontalNumero}
-                            min={10}
-                            max={200}
-                            type="range" 
-                            />
-                        </div>
                     </div>
 
                     <button disabled >Remover fundo</button>
@@ -688,19 +366,6 @@ function Home() {
 
         {/* ALGO CENTRALIZADO ABAIXO */}
 
-        {/* <div>
-                <Popover>
-                    <Popover.Button style={{cursor:'pointer'}}>Informações do Candidato</Popover.Button>
-                        <Popover.Panel>
-                            <div style={{display:'flex',flexDirection:'column'}}>
-                                <input placeholder='Nome do candidato...' />
-                                <input placeholder='Número do candidato...' />
-                                <input placeholder='Nome do candidato...' />
-                            </div>
-                        </Popover.Panel>
-                </Popover>
-            </div> */}
-
         </div>
 
     </div>
@@ -708,4 +373,4 @@ function Home() {
     )
 }
 
-export default Home
+export default Home;

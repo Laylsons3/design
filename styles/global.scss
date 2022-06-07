@@ -23,7 +23,7 @@ body {
 .main {
     background-color: rgb(48,156,209);
     padding: 5px;
-    max-width: 940px;
+    max-width: 931px;
     height: 34.37rem;
     margin: auto;
     margin-top: 10px;
@@ -40,12 +40,35 @@ body {
         .dados-candidato {
             display: flex;
             flex-direction: column;
+            font-family: 'Roboto';
+            font-size: 10pt;
 
             input {
+                width: 100%;
+                font-family: 'Roboto';
+                font-size: 10pt;
+                padding-left: 5px;
+                border: none;
+                border-radius: 2px;
+                margin: 1px;
+            }
+
+            textarea {
+                width: 100%;
+                resize: none;
+                font-family: 'Roboto';
+                font-size: 10pt;
+                padding-left: 5px;
+                border: none;
+                border-radius: 2px;
+                margin: 1px;
+            }
+
+            /* input {
                 padding: 0 3px;
                 border: none;
                 border-radius: 2px;
-                margin-bottom: 2px;
+                // margin-bottom: 2px;
             }
 
             textarea {
@@ -53,10 +76,9 @@ body {
                 padding: 0 3px;
                 border: none;
                 border-radius: 2px;
-                font-family: 'Roboto';
                 font-size: 10pt;
                 resize: none;
-            }
+            } */
         }
     }
 
@@ -119,7 +141,7 @@ body {
         border-radius: 4px;
         display: flex;
         flex-direction: column;
-        margin-left: 10px;
+        margin-left: 5px;
         background-color: #11244177;
         width: 185px;
         font-family: 'Roboto';

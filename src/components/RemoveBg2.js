@@ -1,17 +1,38 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const RemoveBg2 = () => {
+
     const canvas = useRef();
     const [image, setImage] = useState(null);
-    const [tolerancia, setTolerancia] = useState('');
+    const [tolerancia, setTolerancia] = useState('45');
+    const [corRemove, setCorRemove] = useState('#FF00FF');
+
+    const [caminhoImage, setCaminhoImage] = useState('/fundo-verde1.jpg')
+
+    function hexToRgb(hex) {
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        if(result){
+            const rr = parseInt(result[1], 16);
+            const gg = parseInt(result[2], 16);
+            const bb = parseInt(result[3], 16);
+            return rr+","+gg+","+bb;
+        } 
+        return null;
+      }
+    //   console.log(hexToRgb(corRemove)); //pegar esse valor e injetar no referenceColor
 
     const tolerance = tolerancia;
 
     useEffect(() => {
-    const referenceColor = {r:0, g:255, b:0}
+
+        const corR = 0
+        const corG = 255
+        const corB = 0
+
+    const referenceColor = {r:corR, g:corG, b:corB}
 
         const image = new Image();
-        image.src = '/fundo-verde1.jpg';
+        image.src = `${caminhoImage}`; //usar setImage pra adicionar a imagem dinamicamente
         image.onload = drawImage;
 
     function drawImage() {
@@ -23,7 +44,7 @@ const RemoveBg2 = () => {
             processImage(ctx);
         }   
     }
-    
+
     function processImage(context) {
         const imageData = context.getImageData(0, 0, 540, 540); // TAMANHO DA IMAGEM COLOCAR DINAMICO
         const data = imageData.data
@@ -33,9 +54,7 @@ const RemoveBg2 = () => {
                 const g = data[i+1]
                 const b = data[i+2]
 
-                // if (g> 100 && r <100) {
-                //     data[i+3]=0
-                // }
+                // (...)
 
             const color = {r, g, b}
 
@@ -43,7 +62,7 @@ const RemoveBg2 = () => {
             data[i + 3] = 0
             }
 
-            }
+        }
     context.putImageData(imageData, 0, 0);
 
 }
@@ -53,7 +72,7 @@ function distance(color, reference) {
     return modulo;
 }
 
-},[image, canvas, tolerance])
+},[image, canvas, tolerance, caminhoImage])
 
     return (
         <div>
@@ -63,15 +82,27 @@ function distance(color, reference) {
             min={0}
             max={255}
             type="range"
+            value={tolerancia}
             />
 
             <div>
                 <canvas 
                 width={540}
-                height={540}
+                height={360}
                 ref={canvas}/>
+
             </div>
-            {/* <input type="color"/> */}
+            <input 
+                type="color" 
+                value={corRemove} 
+                onChange={e => setCorRemove(e.target.value)} />
+                <span>{corRemove}</span>
+                <div>
+                    <select onChange={e => setCaminhoImage(e.target.value)}>
+                        <option value='/fundo-verde1.jpg'>Imagem 1</option>
+                        <option value='/fundo-verde3.jpg'>Imagem 2</option>
+                    </select>
+                </div>
         </div>
     )
 }

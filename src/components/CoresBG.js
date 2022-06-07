@@ -1,4 +1,5 @@
 export const bg = [
+    { cores: "#2677a8, #aa77a8, #aaffaa",},
     { cores: "#ff972d, #db1865",},
     { cores: "#8b5708, #ffd700",},
     { cores: "#85ccf6, #329cbf",},
